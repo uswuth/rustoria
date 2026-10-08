@@ -1,0 +1,77 @@
+name: Skill Request
+description: Propose a new skill for the repository
+title: "[Skill Request] "
+labels: ["type:skill", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a new skill. Please fill out the details below.
+        Note: we maintain a high bar for new skills. See `docs/planned-capabilities.md` for deferred skills.
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed skill name
+      description: What should the skill be called?
+      placeholder: "e.g. rust-async-patterns"
+    validations:
+      required: true
+
+  - type: input
+    id: category
+    attributes:
+      label: Category
+      description: Which category does this belong to?
+      placeholder: "e.g. libraries, std, production"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What developer/agent problem does this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What should the skill cover?
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Official sources
+      description: What official documentation or repositories support this skill?
+      placeholder: "e.g. https://doc.rust-lang.org/std/, https://github.com/tokio-rs/tokio"
+    validations:
+      required: true
+
+  - type: textarea
+    id: routing
+    attributes:
+      label: Expected routing
+      description: What prompts should activate this skill?
+    validations:
+      required: true
+
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals
+      description: What should NOT be included?
+    validations:
+      required: false
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: How can the skill's correctness be tested?
+    validations:
+      required: true

@@ -1,0 +1,51 @@
+name: Bug Report
+description: Report incorrect information, broken links, or non-compiling examples
+title: "[Bug] "
+labels: ["type:bug", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill out the details below.
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Which file or skill has the problem?
+      placeholder: "e.g. skills/libraries/rust-axum/SKILL.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is the problem?
+      description: Describe the incorrect information, broken link, or error.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What is the correct information?
+      description: If you know the fix, describe it here.
+    validations:
+      required: false
+
+  - type: input
+    id: rust-version
+    attributes:
+      label: Rust version (if applicable)
+      description: Which Rust version does this apply to?
+      placeholder: "e.g. 1.75, stable, nightly"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: verified
+    attributes:
+      label: Verification
+      options:
+        - label: I have checked official Rust documentation
+        - label: I have verified this against the current source

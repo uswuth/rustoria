@@ -1,0 +1,30 @@
+# Rust build artifacts
+target/
+
+# Cargo.lock: ignored for libraries, kept for binaries/examples
+/Cargo.lock
+!examples/**/Cargo.lock
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+*.profraw
+*.profdata
+coverage/
+
+# Temporary files
+*.tmp
+*.bak

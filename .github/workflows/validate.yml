@@ -1,0 +1,63 @@
+name: validate
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# Least privilege: this workflow only reads repository content.
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    name: Structure and triggers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Validate repository structure
+        run: bash scripts/validate.sh
+      - name: Run trigger tests
+        run: bash scripts/test-triggers.sh
+      # Guards the install layout: every skill must land as a directory bundle
+      # (<name>/SKILL.md). Expected count is derived, so this stays correct when
+      # the skill inventory changes.
+      - name: Verify skill install layout
+        run: |
+          dest="$RUNNER_TEMP/rustoria-install"
+          bash scripts/setup.sh "$dest"
+          expected=$(( $(find skills -name SKILL.md | wc -l) + 1 ))
+          actual=$(find "$dest" -name SKILL.md | wc -l)
+          echo "expected bundles=$expected installed=$actual"
+          test "$actual" -eq "$expected"
+          test -f "$dest/rustoria/SKILL.md"
+          flat=$(find "$dest" -maxdepth 1 -name '*SKILL.md' | wc -l)
+          echo "flat top-level SKILL files=$flat"
+          test "$flat" -eq 0
+
+  rust:
+    name: Rust examples
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        example:
+          - std-file-processor
+          - minimal-api
+          - modular-monolith
+          - async-service
+          - cli
+          - library
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+        with:
+          components: clippy, rustfmt
+      - name: Check
+        run: cargo check --manifest-path examples/${{ matrix.example }}/Cargo.toml
+      - name: Test
+        run: cargo test --manifest-path examples/${{ matrix.example }}/Cargo.toml
+      - name: Clippy
+        run: cargo clippy --manifest-path examples/${{ matrix.example }}/Cargo.toml --all-targets -- -D warnings
+      - name: Format
+        run: cargo fmt --manifest-path examples/${{ matrix.example }}/Cargo.toml -- --check

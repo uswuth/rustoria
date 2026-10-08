@@ -1,0 +1,18 @@
+# markdownlint configuration for rustoria
+default: true
+
+# Allow long lines in tables and code blocks
+MD013:
+  line_length: 120
+  tables: false
+  code_blocks: false
+
+# Allow duplicate headings in different sections (skills reuse structure)
+MD024:
+  siblings_only: true
+
+# Allow HTML in markdown (used sparingly)
+MD033: false
+
+# Allow bare URLs
+MD034: false

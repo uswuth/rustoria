@@ -1,0 +1,9 @@
+[package]
+name = "std-file-processor"
+version = "0.1.0"
+edition = "2021"
+description = "A word-frequency file processor using only the Rust standard library"
+license = "MIT"
+
+# Deliberately empty: this example proves the guidance works std-only.
+[dependencies]

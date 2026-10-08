@@ -1,0 +1,5 @@
+# rustfmt configuration for rustoria examples.
+# Edition 2021 matches the examples' Cargo.toml edition.
+edition = "2021"
+max_width = 100
+tab_spaces = 4
