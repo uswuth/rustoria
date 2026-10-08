@@ -38,7 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the skill's actual structure; "signals are not verdicts" guidance added
 - CI workflows pinned to verified commit SHAs with explicit `permissions` blocks
 - First real-runner CI fixes: dropped lychee `--exclude-mail` (removed in lychee 0.24.x)
-  and bumped `actions/checkout` to v7.0.1 (Node 24 native), SHA-pinned
+  and bumped `actions/checkout` to v7.0.1 (Node 24 native), SHA-pinned; later the same pass bumped
+  `softprops/action-gh-release` to v3.0.3 (Node 24 runtime, inputs unchanged), SHA-pinned
 - `scripts/validate.sh` frontmatter gate extended: quote-aware description checks (a plain scalar containing
   an unquoted `repos: security`-style colon is rejected) plus a PyYAML parse of every frontmatter when
   python3 is available - both mutation-tested
