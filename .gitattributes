@@ -6,3 +6,11 @@
 *.jpg binary
 *.ico binary
 *.svg text
+
+# Linguist overrides: https://github.com/github/linguist#overrides
+# Mark tooling scripts as vendored (not counted in language stats)
+scripts/** linguist-vendored
+# Mark skill documentation as documentation (not counted as primary language)
+skills/** linguist-documentation
+# Ensure examples are recognized as Rust projects
+examples/** linguist-language=Rust
