@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Verified discovery-path citations in all six agent `INSTALL.md` files (official docs URLs per agent)
 - Release workflow gate: per-example `cargo check` matrix before publishing a release
 - Exit-code contract tests for `examples/std-file-processor` (help=0 on stdout, usage=2 on stderr)
+- README header logo (`assets/logo.svg`, previously unreferenced) and a one-line install path via the
+  `skills` CLI: `npx skills add uswuth/rustoria --full-depth` (verified against the CLI's discovery rules:
+  `--full-depth` is required for category-nested skills)
 
 ### Changed
 
@@ -36,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflows pinned to verified commit SHAs with explicit `permissions` blocks
 - First real-runner CI fixes: dropped lychee `--exclude-mail` (removed in lychee 0.24.x)
   and bumped `actions/checkout` to v7.0.1 (Node 24 native), SHA-pinned
+- `scripts/validate.sh` frontmatter gate extended: quote-aware description checks (a plain scalar containing
+  an unquoted `repos: security`-style colon is rejected) plus a PyYAML parse of every frontmatter when
+  python3 is available - both mutation-tested
 
 ### Fixed
 
@@ -49,6 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fabricated source URL in `docs/planned-capabilities.md` (`topcoat-rs/topcoat` 404) replaced with the
   verified repository (`tokio-rs/topcoat`); entry now names the crate version and states the pre-1.0
   deferral reason
+- `rust-code-audit` frontmatter description is now quoted: the unquoted colon in `...repos: security audit...`
+  parsed as a nested mapping and strict YAML parsers (e.g. the `skills` CLI) skipped the skill entirely
 
 ### Security
 

@@ -1,5 +1,9 @@
 # rustoria
 
+<p align="center">
+  <img src="assets/logo.svg" alt="rustoria logo" width="180">
+</p>
+
 Production-grade Rust engineering guidance for AI coding agents. A curated collection of **14 skills** covering the Rust
 language, standard library, Cargo/toolchain, production engineering, and key ecosystem libraries — with a strong
 native-Rust foundation and third-party crates as extensions.
@@ -47,6 +51,25 @@ prove the guidance compiles and tests green.
 ## Installation
 
 ### As a skill collection
+
+#### One-line install (npx)
+
+The [`skills` CLI](https://github.com/vercel-labs/skills) installs this repository's skills into any supported
+agent's skills directory (requires Node.js 22.20+):
+
+```bash
+npx skills add uswuth/rustoria --full-depth
+```
+
+`--full-depth` is required so the root router and every category-nested skill are discovered. The CLI detects
+your installed agents (or asks which to target); use `--list` to preview without installing, `-a <agent>` to
+pick a specific agent, and `-g` for a user-wide install.
+
+```bash
+npx skills add uswuth/rustoria --full-depth --list
+```
+
+#### Manual install (Claude Code layout)
 
 Copy the skills into your agent's skills directory. Agents discover skills as a
 **directory bundle** (`<skill-name>/SKILL.md`), per the
