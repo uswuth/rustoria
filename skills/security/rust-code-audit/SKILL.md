@@ -1,6 +1,6 @@
 ---
 name: rust-code-audit
-description: Use when auditing Rust repos: security audit, secret exposure, dependency and supply-chain risk, CI.
+description: "Use when auditing Rust repos: security audit, secret exposure, dependency and supply-chain risk, CI."
 ---
 
 # rust-code-audit — Advanced Rust Repository Audit

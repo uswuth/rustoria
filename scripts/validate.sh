@@ -78,6 +78,23 @@ for f in $SKILL_FILES; do
   if [ -z "$desc" ]; then
     fail "$f: missing description"
   else
+    # Strict YAML: an unquoted ': ' in a plain scalar parses as a nested
+    # mapping, which strict YAML parsers (Agent Skills consumers) reject.
+    # Quoted values are unquoted here so length/period checks see the value,
+    # not the YAML quoting.
+    case "$desc" in
+      \"*\")
+        desc=${desc#\"}
+        desc=${desc%\"}
+        ;;
+      \'*\')
+        desc=${desc#\'}
+        desc=${desc%\'}
+        ;;
+      *": "*)
+        fail "$f: description contains unquoted ': ' (invalid YAML plain scalar; quote the value)"
+        ;;
+    esac
     dlen=${#desc}
     if [ "$dlen" -gt 100 ]; then
       fail "$f: description is $dlen chars (max 100)"
@@ -94,6 +111,31 @@ for f in $SKILL_FILES; do
     SEEN_NAMES="${SEEN_NAMES}${name}"$'\n'
   fi
 done
+
+# Strict YAML parse of every frontmatter, mirroring what Agent Skills
+# consumers do. Runs when python3 + PyYAML are available (CI runners);
+# the portable quote check above remains the fallback elsewhere.
+if command -v python3 >/dev/null 2>&1 && python3 -c 'import yaml' >/dev/null 2>&1; then
+  if ! python3 -c '
+import pathlib, sys, yaml
+root = pathlib.Path(sys.argv[1])
+files = [root / "SKILL.md"] + sorted((root / "skills").rglob("SKILL.md"))
+bad = 0
+for p in files:
+    try:
+        text = p.read_text(encoding="utf-8").replace("\r\n", "\n")
+        if not text.startswith("---\n"):
+            continue
+        end = text.find("\n---\n", 4)
+        yaml.safe_load(text[4:end])
+    except Exception as e:
+        print("[FAIL] %s: frontmatter YAML rejected: %s" % (p, e))
+        bad += 1
+sys.exit(1 if bad else 0)
+' "$REPO_ROOT"; then
+    fail "Frontmatter YAML rejected by strict parser (see messages above)"
+  fi
+fi
 section_pass "$BASE" "Skill frontmatter and names valid"
 
 # ------------------------------------------------------- phantom references ---
