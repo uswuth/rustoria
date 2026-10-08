@@ -46,6 +46,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Agent adapter install paths corrected to officially documented locations (for example Codex discovers
   skills from `.agents/skills`, not `~/.codex/skills`) with per-agent source citations
 - `examples/std-file-processor` help/usage exit codes now follow the conventional 0/2 contract
+- Fabricated source URL in `docs/planned-capabilities.md` (`topcoat-rs/topcoat` 404) replaced with the
+  verified repository (`tokio-rs/topcoat`); entry now names the crate version and states the pre-1.0
+  deferral reason
 
 ### Security
 

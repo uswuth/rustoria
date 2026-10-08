@@ -9,11 +9,12 @@ criteria for implementation, and reason for deferral.
 
 - **Purpose:** Full-stack web framework guidance
 - **Proposed scope:** Routing, views, state management, deployment
-- **Dependencies:** topcoat crate with stable API
-- **Official sources:** https://github.com/topcoat-rs/topcoat
+- **Dependencies:** `topcoat` crate (0.10.0 as of 2026-10; pre-1.0)
+- **Official sources:** https://github.com/tokio-rs/topcoat
 - **Status:** Deferred
-- **Reason:** Crate is early-stage; API not stable enough for accurate guidance
-- **Criteria:** Stable release, verified API, compile-tested examples
+- **Reason:** Pre-1.0 API (0.10.x) can change without a SemVer-major signal; guidance
+  written today could go stale on the next minor release
+- **Criteria:** Stable 1.0 release, verified API, compile-tested examples
 
 ### rust-gpui-kit
 
