@@ -63,7 +63,9 @@ integrity model.
 
 ### Currently Automated (`scripts/validate.sh`)
 
-- Skill count, frontmatter, name↔dir, duplicates, orphans, phantoms
+- Skill count, frontmatter, name↔dir, duplicates, orphans, phantoms (frontmatter also gets strict-YAML
+  validation: quote-aware description checks plus a PyYAML parse of every frontmatter when python3 is
+  available - the exact rejection an Agent Skills consumer would perform)
 - README and AGENTS.md catalog consistency
 - Router coverage (both directions: missing routes and dead entries)
 - Internal links (file existence, including anchored links)
