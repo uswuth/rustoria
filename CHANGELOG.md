@@ -34,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Audit skill intro, data-flow chain (normalization and authorization stages), and tool table aligned with
   the skill's actual structure; "signals are not verdicts" guidance added
 - CI workflows pinned to verified commit SHAs with explicit `permissions` blocks
+- First real-runner CI fixes: dropped lychee `--exclude-mail` (removed in lychee 0.24.x)
+  and bumped `actions/checkout` to v7.0.1 (Node 24 native), SHA-pinned
 
 ### Fixed
 
