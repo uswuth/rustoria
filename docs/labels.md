@@ -60,3 +60,5 @@ Labels are used to categorize issues and PRs. Do not create labels merely for de
 - Priority labels are optional but recommended for bugs.
 - Status labels are applied during triage.
 - `deferred` is used for intentionally postponed work (e.g. gpui-kit, topcoat).
+
+<!-- PR automation test artifact; this branch is never merged -->
